@@ -10,6 +10,18 @@ mp_hands = mp.solutions.hands
 def calculate_distance(point1, point2):
     return math.hypot(point2[0]-point1[0], point2[1]-point1[1])
 
+def recognize_pointLeft(hand_landmarks):
+    # check if the distance between the tip of index finger is closer to 0 than base
+    index_tip = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
+    index_mcp = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_MCP]
+
+    if index_tip.x < index_mcp.x
+        return "Point Left"
+    else
+        return None
+
+
+
 # Define a simple gesture recognition function
 def recognize_palm(hand_landmarks):
     # Example: Recognize if the hand is showing a fist or open palm
