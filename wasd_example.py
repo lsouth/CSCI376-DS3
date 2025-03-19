@@ -5,6 +5,7 @@ import mediapipe as mp
 from mediapipe.tasks.python.vision import GestureRecognizer, GestureRecognizerOptions
 from mediapipe.tasks.python import BaseOptions
 from mediapipe.framework.formats import landmark_pb2
+import bloxorz
 
 import pyautogui
 
@@ -42,7 +43,7 @@ def main():
         if result.gestures:
             recognized_gesture = result.gestures[0][0].category_name
             confidence = result.gestures[0][0].score
-
+            
             # Example of pressing keys with pyautogui based on recognized gesture
             if recognized_gesture == "Thumb_Up":
                 pyautogui.press("w")
