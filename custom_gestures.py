@@ -19,6 +19,36 @@ def recognize_pointLeft(hand_landmarks):
         return "Point Left"
     else:
         return None
+    
+def recognize_thumbs_right(hand_landmarks):
+    # get thumb coordinated
+    thumb_tip = hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP]
+    thumb_cmc = hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_CMC]
+
+    # get all other fingers PIP
+    index_pip = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_PIP]
+    middle_pip = hand_landmarks.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_PIP]
+    ring_pip = hand_landmarks.landmark[mp_hands.HandLandmark.RING_FINGER_PIP]
+    pinky_pip = hand_landmarks.landmark[mp_hands.HandLandmark.PINKY_PIP]
+
+    # get all other fingers TIP
+    index_tip = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
+    middle_tip = hand_landmarks.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP]
+    ring_tip = hand_landmarks.landmark[mp_hands.HandLandmark.RING_FINGER_TIP]
+    pinky_tip = hand_landmarks.landmark[mp_hands.HandLandmark.PINKY_TIP]
+    
+    # tips of all other fingers lower than pip of all other fingers
+    is_all_tips_lower = index_tip.y > index_pip.y and middle_tip.y > middle_pip.y and ring_tip.y > ring_pip.y and pinky_tip.y > pinky_pip.y
+
+    index_pinky_knuckle_y_dist = abs(thumb_tip.y - index_tip.y)
+    knuckles_horizontal = index_pinky_knuckle_y_dist < 0.1
+
+    # x of tip of thumb > x of thumb cmc and mcp and is_all_tips_lower = True and knuckles are horizontal
+    if thumb_tip.x > thumb_cmc.x and is_all_tips_lower and knuckles_horizontal:
+        return "Point Right"
+    else:
+        return "Unknown"
+
 
 # Define a simple gesture recognition function
 def recognize_palm(hand_landmarks):
@@ -105,6 +135,7 @@ def main():
                     gesture = recognize_palm(hand_landmarks)
                     gesture = recognize_ok(hand_landmarks)
                     gesture = recognize_pointLeft(hand_landmarks)
+                    gesture = recognize_thumbs_right(hand_landmarks)
 
 
                     # Display gesture near hand location
