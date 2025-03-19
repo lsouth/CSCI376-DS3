@@ -15,9 +15,9 @@ def recognize_pointLeft(hand_landmarks):
     index_tip = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
     index_mcp = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_MCP]
 
-    if index_tip.x < index_mcp.x
+    if index_tip.x < index_mcp.x:
         return "Point Left"
-    else
+    else:
         return None
 
 # Define a simple gesture recognition function
