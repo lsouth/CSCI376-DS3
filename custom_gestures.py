@@ -20,8 +20,6 @@ def recognize_pointLeft(hand_landmarks):
     else
         return None
 
-
-
 # Define a simple gesture recognition function
 def recognize_palm(hand_landmarks):
     # Example: Recognize if the hand is showing a fist or open palm
