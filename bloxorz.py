@@ -186,11 +186,11 @@ def main():
 
                 if is_prev_rest:
                     if recognized_gesture == "Thumb_Up":
-                        pyautogui.press("w")
+                        pyautogui.press('up')
                         is_prev_rest = False
                         pass
                     elif recognized_gesture == "Thumb_Down":
-                        pyautogui.press("s")
+                        pyautogui.press('down')
                         is_prev_rest = False
                         pass
                 
@@ -215,13 +215,13 @@ def main():
 
                     if is_prev_rest:
                         if gesture == "Point Right":
-                            pyautogui.press("d")
+                            pyautogui.press('right')
                             is_prev_rest = False
                             pass
                         else:
                             gesture = recognize_pointLeft(hand_landmarks)
                             if gesture == "Point Left":
-                                pyautogui.press("a")
+                                pyautogui.press('left')
                                 is_prev_rest = False
                                 pass
 
